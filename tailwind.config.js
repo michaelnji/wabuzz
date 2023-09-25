@@ -55,7 +55,7 @@ const config = {
 			},
 			fontFamily: {
 				sans: ['Raleway Variable',...fontFamily.sans],
-				head: ['Oswald Variable',...fontFamily.sans],
+				head: ['Open Sans Variable',...fontFamily.sans],
 			}
 		}
 	},
