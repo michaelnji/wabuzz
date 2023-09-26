@@ -1,9 +1,5 @@
 <script lang="ts">
-  import i from "$lib/images/w.png";
-  import Button from "$lib/components/ui/button/button.svelte";
   import { Badge } from "$lib/components/ui/badge";
-  import { BxQuestionMark } from "svelte-boxicons";
-  import Faq from "$lib/components/custom/faq.svelte";
 </script>
 
 <!-- banner - start -->
