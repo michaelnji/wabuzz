@@ -78,12 +78,12 @@
       <!-- content - end -->
 
       <!-- image - start -->
-      <div class=" overflow-hidden xl:w-5/12">
-        <img
+      <div class=" overflow-hidden xl:w-6/12"> 
+        <img 
           src={i}
           loading="lazy"
           alt="by Fakurian Design"
-          class="h-full w-full object-cover object-center shadow-xl shadow-zinc-600"
+          class=" w-full object-cover object-center  rotate-12"
         />
       </div>
       <!-- image - end -->
