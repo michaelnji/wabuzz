@@ -24,7 +24,8 @@
           </p>
 
           <h1
-            class="mb-8 text-4xl font-bold text-black sm:text-5xl md:mb-12 md:text-8xl font-head"
+            class="mb-8  text-black  md:mb-12 font-head scroll-m-20 text-5xl font-extrabold tracking-tight md:text-8xl"
+           
           >
             Want more whatsapp views? try w/<span class="text-primary"
               >wabuzz</span
