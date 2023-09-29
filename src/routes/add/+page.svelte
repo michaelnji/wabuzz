@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { fly } from "svelte/transition";
   import ContactSubmitted from "./../../lib/components/custom/add/contactSubmitted.svelte";
   import UserNotice from "$lib/components/custom/add/userNotice.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
   import { Input } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
   import * as Select from "$lib/components/ui/select";
-  import { isValidName, isValidPhone } from "$lib/scripts/helper";
+  import { isValidName, isValidPhone, sanitizer } from "$lib/scripts/helper";
   import type { AddContactResponse, ContactDetails } from "$lib/types";
   import {
     createForm,
@@ -63,7 +64,7 @@
       submitted=false
       isloading = true;
       const userDetail: ContactDetails = {
-        name,
+        name: sanitizer(name),
         phone: selectedCountryCode + phone,
         country,
         country_code: selectedCountryCode ? selectedCountryCode : "",
@@ -115,20 +116,20 @@
 <UserNotice />
 <ContactExistsNotice showNotice={contactExists} details={contact} />
 <ContactSubmitted showNotice={submitted} />
-<div class="w-screen h-screen grid place-items-center">
-  <div class="bg-white py-6 sm:py-8 lg:py-12">
+<div class="w-screen h-screen grid place-items-center bg-muted">
+  <div class="bg-white py-6 rounded-md border sm:py-8 lg:py-12">
     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-      <h2
-        class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl font-head mx-auto max-w-max mb-4"
+      <h2 in:fly={{y:-20}}
+        class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl font-head mx-auto max-w-max mb-4"
       >
         Submit your contact
       </h2>
-      <p class=" mb-6 mx-auto max-w-max">
+      <p in:fly={{y:20}} class=" mb-6 mx-auto max-w-max">
         Please fill in this form to submit your contact to wabuzz's system
       </p>
-      <form use:form class="mx-auto max-w-lg rounded-lg border">
-        <div class="flex flex-col gap-4 p-6">
-          <div class="flex flex-col w-full gap-1.5">
+      <form use:form class="mx-auto max-w-lg">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col w-full gap-1.5" in:fly={{y:20, delay:50}}>
             <Label for="name"
               >Name <span class="text-destructive text-xl">*</span></Label
             >
@@ -145,7 +146,7 @@
               </p>
             {/if}
           </div>
-          <div class="flex flex-col w-full gap-1.5">
+          <div class="flex flex-col w-full gap-1.5" in:fly={{y:20, delay:100}}>
             <Label for="selectedCountryCode"
               >Country <span class="text-destructive text-xl">*</span></Label
             >
@@ -176,7 +177,7 @@
               />
             </Select.Root>
           </div>
-          <div class="flex flex-col w-full gap-1.5">
+          <div class="flex flex-col w-full gap-1.5" in:fly={{y:20, delay:150}}>
             <Label for="phone"
               >Phone Number <span class="text-destructive text-xl">*</span
               ></Label
@@ -212,13 +213,15 @@
             {/if}
           </div>
 
-          <Button type="submit" class="w-full mt-4" disabled={isloading} size="lg">
+         <div in:fly={{y:20, delay:100}}>
+           <Button type="submit" class="w-full mt-4" disabled={isloading} size="lg">
             {#if isloading}
              <div class="animate animate-spin"> <Loader /></div>
             {:else}
               Submit Contact
             {/if}
           </Button>
+         </div>
         </div>
       </form>
     </div>

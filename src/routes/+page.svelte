@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade, fly } from "svelte/transition";
   import i from "$lib/images/w.webp";
   import Button from "$lib/components/ui/button/button.svelte";
   import Faq from "$lib/components/custom/faq.svelte";
@@ -19,11 +20,11 @@
         <!-- <div /> -->
 
         <div class="sm:text-center lg:py-12 lg:text-left">
-          <p class="mb-2 md:text-lg xl:text-xl">
+          <p in:fly={{x:-20, duration:500}} class="mb-2 md:text-lg xl:text-xl">
             NEXT FILE DROPS IN <b class="text-primary">TWO DAYS</b>
           </p>
 
-          <h1
+          <h1 in:fly={{y:-20,delay:100, duration:300}}
             class="mb-8  text-black  md:mb-12 font-head scroll-m-20 text-5xl font-extrabold tracking-tight md:text-8xl"
            
           >
@@ -32,8 +33,8 @@
             >
           </h1>
 
-          <div
-            class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start"
+          <div in:fly={{y:20,delay:150}} 
+             class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start"
           >
             <Button href="/add" variant="default" size="lg">
               Add Phone Number
@@ -45,7 +46,7 @@
         </div>
 
         <!-- social - start -->
-        <div
+        <div in:fly={{x:20, duration:500}}
           class="mt-8 flex items-center justify-center gap-4 sm:mt-16 lg:justify-start"
         >
           <span
@@ -79,7 +80,7 @@
       <!-- content - end -->
 
       <!-- image - start -->
-      <div class=" overflow-hidden xl:w-6/12"> 
+      <div class=" overflow-hidden xl:w-6/12" in:fade={{ duration:500}}> 
         <img 
           src={i}
           loading="lazy"

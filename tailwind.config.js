@@ -54,7 +54,7 @@ const config = {
 				sm: "calc(var(--radius) - 4px)"
 			},
 			fontFamily: {
-				sans: ['Raleway Variable',...fontFamily.sans],
+				sans: ['Open Sans Variable',...fontFamily.sans],
 				head: ['Open Sans Variable',...fontFamily.sans],
 			}
 		}

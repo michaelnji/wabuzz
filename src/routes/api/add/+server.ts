@@ -4,6 +4,7 @@ import { json, type RequestHandler } from "@sveltejs/kit";
 
 export const POST: RequestHandler = async ({ request }) => {
   const { phone, country, country_code, name } = await request.json();
+  console.log(name)
   const contactFromDb = {
     status: 200,
     error: null,
