@@ -13,19 +13,19 @@
 <div class="bg-white pb-6 sm:pb-8 lg:pb-12 pt-12">
   <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
     <section
-      class="flex flex-col justify-between gap-6 sm:gap-10 md:gap-16 lg:flex-row"
+      class="flex flex-col justify-between gap-6 sm:gap-10 md:gap-16 lg:flex-row overflow-x-hidden"
     >
       <!-- content - start -->
       <div class="flex flex-col justify-between xl:w-5/12">
         <!-- <div /> -->
 
-        <div class="sm:text-center lg:py-12 lg:text-left">
+        <div class="text-center lg:py-12 lg:text-left">
           <p in:fly={{x:-20, duration:500}} class="mb-2 md:text-lg xl:text-xl">
-            NEXT FILE DROPS IN <b class="text-primary">TWO DAYS</b>
+           Formerly known as <b class="text-primary">Whatsgrow</b>
           </p>
 
           <h1 in:fly={{y:-20,delay:100, duration:300}}
-            class="mb-8  text-black  md:mb-12 font-head scroll-m-20 text-5xl font-extrabold tracking-tight md:text-8xl"
+            class="mb-8  text-black  md:mb-12 font-head scroll-m-20 text-5xl font-extrabold tracking-tight md:text-8xl text-center lg:text-left"
            
           >
             Want more whatsapp views? try w/<span class="text-primary"
@@ -37,7 +37,7 @@
              class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start"
           >
             <Button href="/add" variant="default" size="lg">
-              Add Phone Number
+              Submit Contact
             </Button>
             <Button href="/download" variant="secondary" size="lg">
               Download VCF file

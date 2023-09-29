@@ -3,7 +3,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 import type { Button as ButtonPrimitive } from "bits-ui";
 
 const buttonVariants = tv({
-	base: "inline-flex items-center justify-center rounded-lg text-sm font-medium whitespace-nowrap ring-offset-background transition easing-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-head duration-300 disabled:bg-muted disabled:text-muted-foreground active:scale-95",
+	base: "inline-flex items-center justify-center rounded-lg text-sm font-medium whitespace-nowrap ring-offset-background transition easing-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-head duration-300 disabled:!bg-gray-200 disabled:!text-gray-600 active:scale-95 uppercase",
 	variants: {
 		variant: {
 			default: "bg-primary text-primary-foreground hover:bg-primary/90 ",
@@ -19,7 +19,7 @@ const buttonVariants = tv({
 		size: {
 			default: "h-10 px-4 py-3",
 			sm: "h-9  px-3",
-			lg: "h-12 px-8 text-lg md:text-xl",
+			lg: "h-12 px-8 text-lg",
 			icon: "h-10 w-10"
 		}
 	},

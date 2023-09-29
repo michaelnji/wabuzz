@@ -117,10 +117,10 @@
 <ContactExistsNotice showNotice={contactExists} details={contact} />
 <ContactSubmitted showNotice={submitted} />
 <div class="w-screen h-screen grid place-items-center bg-muted">
-  <div class="bg-white py-6 rounded-md border sm:py-8 lg:py-12">
+  <div class="bg-white py-6 md:rounded-xl border sm:py-8 lg:py-12 px-6">
     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
       <h2 in:fly={{y:-20}}
-        class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl font-head mx-auto max-w-max mb-4"
+        class="scroll-m-20 text-3xl font-bold tracking-tight lg:text-4xl font-head mx-auto max-w-max mb-4"
       >
         Submit your contact
       </h2>

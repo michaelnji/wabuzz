@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    scroll-behavior: smooth;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -19,7 +20,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
 
-    --primary: 130 57% 56%;
+    --primary: 150 67% 46%;
     --primary-foreground: 93 22% 92%;
 
     --secondary: 240 4.8% 95.9%;
@@ -75,4 +76,26 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color:  hsl(150 67% 46%);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: hsl(150 67% 46%);
+	border-radius: 14px;
+	
 }

@@ -145,7 +145,7 @@
 
         <p class="text-gray-700">
           <Button href="/add" variant="secondary" size="sm">Click here</Button> to
-          chat with the admin concerning permanent verification?
+          chat with the admin concerning permanent verification & pricing.
         </p>
       </div>
       <!-- question - end -->

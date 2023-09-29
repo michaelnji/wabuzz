@@ -9,8 +9,7 @@
   <div
     class="order-1  mx-auto items-center font-head mb-2 max-w-screen-sm text-base text-white sm:order-none sm:mb-0 sm:w-auto md:text-md"
   >
-     File drops in <b>02:50:90</b>
-     <Badge variant="secondary" class=" ml-2">0 contacts</Badge>
+     File drops in <b>02 days 01 hour(s)</b>
   </div>
 
   <!-- close button - start -->
