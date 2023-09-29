@@ -10,3 +10,8 @@ export const isValidName = (name: string = '') => {
     const found : boolean = re.test(name);
     return found
 } 
+export const isValidPhone = (phone: string = '') => {
+   const re = /^[0-9]+$/g;
+    const found : boolean = re.test(phone);
+    return found
+} 

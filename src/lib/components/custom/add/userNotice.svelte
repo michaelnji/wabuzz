@@ -6,14 +6,19 @@
   import { toggleUserGuide } from "$lib/scripts/helper";
   import { getOrSetItem } from "$lib/scripts/localStorage";
   import { onMount } from "svelte";
+
   let showNotice: boolean = true;
   let activeTab:string = 'Guidelines'
+  let ready : boolean = false
+
   onMount(() => {
     showNotice = getOrSetItem("show-notice", true);
+    ready = true
   });
+  
 </script>
 
-{#if showNotice}
+{#if showNotice && ready}
   <Dialog.Root
   open={true}
   preventScroll={false}
@@ -89,5 +94,4 @@
     </Tabs.Root>
   </Dialog.Content>
 </Dialog.Root>
-
 {/if}

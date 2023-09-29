@@ -38,6 +38,7 @@
     "@fontsource-variable/open-sans": "^5.0.13",
     "@fontsource-variable/oswald": "^5.0.12",
     "@fontsource-variable/raleway": "^5.0.9",
+    "@supabase/supabase-js": "^2.36.0",
     "bits-ui": "^0.5.7",
     "clsx": "^2.0.0",
     "felte": "^1.2.12",
