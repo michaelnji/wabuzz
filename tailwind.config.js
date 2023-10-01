@@ -55,7 +55,8 @@ const config = {
 			},
 			fontFamily: {
 				sans: ['Open Sans Variable',...fontFamily.sans],
-				head: ['Open Sans Variable',...fontFamily.sans],
+				head: ['Kanit',...fontFamily.sans],
+				mono: ['Martian Mono',...fontFamily.mono],
 			}
 		}
 	},

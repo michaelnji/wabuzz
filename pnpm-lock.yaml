@@ -45,6 +45,12 @@ dependencies:
     version: 2.10.0
 
 devDependencies:
+  '@fontsource/kanit':
+    specifier: ^5.0.13
+    version: 5.0.13
+  '@fontsource/martian-mono':
+    specifier: ^5.0.8
+    version: 5.0.8
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.0.0(@sveltejs/kit@1.20.4)
@@ -394,6 +400,14 @@ packages:
   /@fontsource-variable/raleway@5.0.9:
     resolution: {integrity: sha512-HdDKMijtCgXDY7VEmtB7mDs8pjo35lt51JQ9OqlfHCqKZDutHxvHR7teT1yZbQA7DqQuCYTjSee9UfnhB7F/+g==}
     dev: false
+
+  /@fontsource/kanit@5.0.13:
+    resolution: {integrity: sha512-1giX/9DA90vELxYz6fQd7ncJwNBU7gFeYtOsCqk1j9sp6eZLbsVAifSiyPDA1dziO0A1EAyI69zEGAdiAK8M3Q==}
+    dev: true
+
+  /@fontsource/martian-mono@5.0.8:
+    resolution: {integrity: sha512-9XXGJww+3rrztm6d8aauiHUW1LMWmOlKmAQkpZKN1j5PQ3MrGWk+E2C+vN/9DxcCBSz55tZAtMCcOSFSqJXT7g==}
+    dev: true
 
   /@humanwhocodes/config-array@0.11.11:
     resolution: {integrity: sha512-N2brEuAadi0CcdeMXUkhbZB84eskAc8MEX1By6qEchoVywSgXPIjou4rYsl0V3Hj0ZnuGycGCjdNgockbzeWNA==}

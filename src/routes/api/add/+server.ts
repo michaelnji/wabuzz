@@ -1,28 +1,75 @@
 // import { getSingleContact } from "$lib/server/supabase/contactsManager";
-import type { AddContactResponse } from "$lib/types";
+import {
+  addContact,
+  getSingleContact,
+} from "$lib/server/supabase/contactsManager";
+import type { AddContactResponse, ContactDetails } from "$lib/types";
 import { json, type RequestHandler } from "@sveltejs/kit";
 
 export const POST: RequestHandler = async ({ request }) => {
-  const { phone, country, country_code, name } = await request.json();
-  console.log(name)
-  const contactFromDb = {
-    status: 200,
-    error: null,
+  const {
     phone,
     country,
     country_code,
     name,
-    exist: false,
-    verification_status: "permanently verified",
-    ban_reason: "",
-  };
+    verification_status,
+    id,
+    ban_reason,
+  } = await request.json();
 
-  const responseData: AddContactResponse = {
-    status: contactFromDb && contactFromDb.status ? contactFromDb.status : 200,
-    message:
-      contactFromDb && contactFromDb.error ? contactFromDb.error : "Contact submission complete",
-    data: contactFromDb,
-  };
+  let responseData: AddContactResponse;
+  const contactFromServer = await getSingleContact(phone);
 
+  if (contactFromServer && contactFromServer.error) {
+    responseData = {
+      status: 500,
+      message: contactFromServer.error,
+      data: {},
+    };
+    return json(responseData);
+  }
+
+  if (contactFromServer.phone == phone) {
+    const contactFromDb = {
+      status: 200,
+      error: null,
+      exist: true,
+      ...contactFromServer,
+    };
+
+    responseData = {
+      status: contactFromDb.status,
+      message: "Contact already exists",
+      data: contactFromDb,
+    };
+
+    return json(responseData);
+  }
+
+  const details: ContactDetails = {
+    phone,
+    name,
+    country,
+    country_code,
+    verification_status,
+    id,
+    ban_reason,
+  };
+  const addedContact = await addContact(details);
+
+  if (addedContact && addedContact.error) {
+    responseData = {
+      status: 500,
+      message: addedContact.error,
+      data: {},
+    };
+    return json(responseData);
+  }
+
+  responseData = {
+    status: 200,
+    message: "Contact submission complete",
+    data: {...addedContact, error: null, exists: false},
+  };
   return json(responseData);
 };

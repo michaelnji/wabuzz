@@ -5,6 +5,7 @@ export type ContactDetails = {
   country: string | unknown;
   verification_status: string;
   ban_reason: string,
+  id: string
   
 };
 

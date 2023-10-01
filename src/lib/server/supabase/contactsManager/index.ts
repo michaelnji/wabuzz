@@ -1,5 +1,6 @@
 import { errorHandler } from "$lib/server/handler";
 import { supabase } from "$lib/server/supabase/initiator";
+import type { ContactDetails } from "$lib/types";
 
 export const getSingleContact = async (phone: string) => {
   const { data, error, status } = await supabase
@@ -15,3 +16,14 @@ export const getSingleContact = async (phone: string) => {
 
   
 };
+
+export const addContact = async (data: ContactDetails) => {
+  const { data: profile, error, status } = await supabase.from('contacts').insert([data]).select()
+  
+  if (error) return errorHandler(error)
+  if (status == 200) {
+    if (profile && profile.length == 1) return profile[0];
+    return {};
+  }
+  
+}

@@ -14,7 +14,7 @@
   <Dialog.Root open={showNotice} preventScroll={false}>
     <Dialog.Content class="max-h-screen">
       <Dialog.Header>
-        <Dialog.Title class="font-head text-3xl"
+        <Dialog.Title class="font-head text-2xl"
           >Your contact exists</Dialog.Title
         >
       </Dialog.Header>

@@ -18,6 +18,7 @@
   import { Loader, Loader2, LucideLoader } from "lucide-svelte";
   import ContactExistsNotice from "$lib/components/custom/add/contactExistsNotice.svelte";
   import { BxLoader, BxLoaderAlt, BxLoaderCircle } from "svelte-boxicons";
+import { v4 as uuidv4 } from "uuid";
 
   let selectedCountryCode: unknown = "xxx";
   let name: string = "";
@@ -30,16 +31,6 @@
   let contactExists: boolean = false;
   let submitted: boolean = false;
   let contact: ContactDetails;
-
-  function handleSuccess(event: FelteSuccessEvent) {
-    const { response, ...context } = event.detail;
-    console.log(response);
-  }
-
-  function handleError(event: FelteErrorEvent) {
-    const { error, ...context } = event.detail;
-    console.log(error);
-  }
 
   const { form } = createForm({
     async onSubmit(values, context) {
@@ -70,6 +61,8 @@
         country_code: selectedCountryCode ? selectedCountryCode : "",
         verification_status: "not verified",
         ban_reason: "",
+        id: uuidv4()
+        
       };
 
       const res = await fetch("/api/add", {
