@@ -1,6 +1,7 @@
 import type { ContactDetails } from "$lib/types";
 import { setItemValue } from "../localStorage";
 import { saveAs } from "file-saver";
+import { isArray } from "mathjs";
 import { v4 as uuidv4 } from "uuid";
 import vCardsJS from "vcards-js";
 
@@ -32,21 +33,28 @@ export const sanitizer = (dirtyString: string): string => {
 export const saveVcfFile = (vcfData: string) => {
   try {
     const blob = new Blob([vcfData], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, `vCard_0${uuidv4(10)}.vcf`);
+    saveAs(blob, `vCard_0${uuidv4()}.vcf`);
   } catch (err) {
    return err
   }
 };
 
-export const createVcard = (data: ContactDetails[], batch:string): string => {
+export const createVcard = (data: ContactDetails[] | unknown, batch:string): string => {
     const vCard = vCardsJS();
     let finalVcard = "";
-    data.forEach((e) => {
-      vCard.cellPhone = e.phone;
-      vCard.firstName = `wabuzz-${batch}` + e.name;
-      finalVcard = finalVcard + vCard.getFormattedString();
-    });
+  if (isArray(data)) {
+      data.forEach((e) => {
+        vCard.cellPhone = e.phone;
+        vCard.name = `wabuzz-${batch}`;
+        vCard.firstName = e.name;
+        finalVcard = finalVcard + vCard.getFormattedString();
+      });
+   }
 
     return finalVcard
     
+}
+
+export const isEmptyObject = (obj: object)=>{
+  return JSON.stringify(obj) === '{}'
 }

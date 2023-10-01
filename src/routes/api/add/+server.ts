@@ -1,7 +1,7 @@
-// import { getSingleContact } from "$lib/server/supabase/contactsManager";
 import {
   addContact,
   getSingleContact,
+ 
 } from "$lib/server/supabase/contactsManager";
 import type { AddContactResponse, ContactDetails } from "$lib/types";
 import { json, type RequestHandler } from "@sveltejs/kit";
@@ -66,6 +66,7 @@ export const POST: RequestHandler = async ({ request }) => {
     return json(responseData);
   }
 
+ 
   responseData = {
     status: 200,
     message: "Contact submission complete",

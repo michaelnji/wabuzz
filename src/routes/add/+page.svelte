@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly } from "svelte/transition";
+  import { fly } from "svelte/transition";
   import ContactSubmitted from "./../../lib/components/custom/add/contactSubmitted.svelte";
   import UserNotice from "$lib/components/custom/add/userNotice.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
@@ -7,18 +7,15 @@
   import { Label } from "$lib/components/ui/label";
   import * as Select from "$lib/components/ui/select";
   import { isValidName, isValidPhone, sanitizer } from "$lib/scripts/helper";
-  import type { AddContactResponse, ContactDetails } from "$lib/types";
+  import type { ContactDetails } from "$lib/types";
   import {
     createForm,
-    type FelteErrorEvent,
-    type FelteSuccessEvent,
   } from "felte";
   import { countries } from "$lib/data/countries";
   import { addToast } from "$lib/scripts/helper/toaster";
-  import { Loader, Loader2, LucideLoader } from "lucide-svelte";
+  import { Loader } from "lucide-svelte";
   import ContactExistsNotice from "$lib/components/custom/add/contactExistsNotice.svelte";
-  import { BxLoader, BxLoaderAlt, BxLoaderCircle } from "svelte-boxicons";
-import { v4 as uuidv4 } from "uuid";
+  import { v4 as uuidv4 } from "uuid";
 
   let selectedCountryCode: unknown = "xxx";
   let name: string = "";
@@ -52,7 +49,7 @@ import { v4 as uuidv4 } from "uuid";
         return;
       }
       contactExists = false;
-      submitted=false
+      submitted = false;
       isloading = true;
       const userDetail: ContactDetails = {
         name: sanitizer(name),
@@ -61,8 +58,7 @@ import { v4 as uuidv4 } from "uuid";
         country_code: selectedCountryCode ? selectedCountryCode : "",
         verification_status: "not verified",
         ban_reason: "",
-        id: uuidv4()
-        
+        id: uuidv4(),
       };
 
       const res = await fetch("/api/add", {
@@ -112,17 +108,21 @@ import { v4 as uuidv4 } from "uuid";
 <div class="w-screen h-screen grid place-items-center bg-muted">
   <div class="bg-white py-6 md:rounded-xl border sm:py-8 lg:py-12 px-6">
     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-      <h2 in:fly={{y:-20}}
-        class="scroll-m-20 text-3xl font-bold tracking-tight lg:text-4xl font-head mx-auto max-w-max mb-4"
+      <h2
+        in:fly={{ y: -20 }}
+        class="scroll-m-20 text-3xl font-bold tracking-tight lg:text-4xl font-head text-center mb-4"
       >
         Submit your contact
       </h2>
-      <p in:fly={{y:20}} class=" mb-6 mx-auto max-w-max">
+      <p in:fly={{ y: 20 }} class=" mb-6 text-center">
         Please fill in this form to submit your contact to wabuzz's system
       </p>
       <form use:form class="mx-auto max-w-lg">
         <div class="flex flex-col gap-4">
-          <div class="flex flex-col w-full gap-1.5" in:fly={{y:20, delay:50}}>
+          <div
+            class="flex flex-col w-full gap-1.5"
+            in:fly={{ y: 20, delay: 50 }}
+          >
             <Label for="name"
               >Name <span class="text-destructive text-xl">*</span></Label
             >
@@ -139,7 +139,10 @@ import { v4 as uuidv4 } from "uuid";
               </p>
             {/if}
           </div>
-          <div class="flex flex-col w-full gap-1.5" in:fly={{y:20, delay:100}}>
+          <div
+            class="flex flex-col w-full gap-1.5"
+            in:fly={{ y: 20, delay: 100 }}
+          >
             <Label for="selectedCountryCode"
               >Country <span class="text-destructive text-xl">*</span></Label
             >
@@ -170,7 +173,10 @@ import { v4 as uuidv4 } from "uuid";
               />
             </Select.Root>
           </div>
-          <div class="flex flex-col w-full gap-1.5" in:fly={{y:20, delay:150}}>
+          <div
+            class="flex flex-col w-full gap-1.5"
+            in:fly={{ y: 20, delay: 150 }}
+          >
             <Label for="phone"
               >Phone Number <span class="text-destructive text-xl">*</span
               ></Label
@@ -206,15 +212,20 @@ import { v4 as uuidv4 } from "uuid";
             {/if}
           </div>
 
-         <div in:fly={{y:20, delay:100}}>
-           <Button type="submit" class="w-full mt-4" disabled={isloading} size="lg">
-            {#if isloading}
-             <div class="animate animate-spin"> <Loader /></div>
-            {:else}
-              Submit Contact
-            {/if}
-          </Button>
-         </div>
+          <div in:fly={{ y: 20, delay: 100 }}>
+            <Button
+              type="submit"
+              class="w-full mt-4"
+              disabled={isloading}
+              size="lg"
+            >
+              {#if isloading}
+                <div class="animate animate-spin"><Loader /></div>
+              {:else}
+                Submit Contact
+              {/if}
+            </Button>
+          </div>
         </div>
       </form>
     </div>
