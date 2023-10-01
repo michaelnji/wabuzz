@@ -10,7 +10,7 @@
 
 {#if showNotice}
   <Dialog.Root open={showNotice} preventScroll={false}>
-    <Dialog.Content class="max-h-screen overflow-y-scroll">
+    <Dialog.Content class="max-h-[90%] overflow-y-scroll">
       <Dialog.Header>
         <Dialog.Title  class="font-head text-2xl flex items-center gap-x-3">Contact Submitted <UserCheckIcon/> </Dialog.Title
         >
