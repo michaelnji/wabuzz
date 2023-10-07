@@ -24,6 +24,7 @@
       isLoading = false;
     }, 2000);
   }
+  console.log(data)
 
   onMount(() => {
     ready = true;
@@ -31,8 +32,8 @@
   });
 </script>
 
+{#if ready && data.status == 200}
 <Banner date={data.expires} name={data.name} finishes={data.archived_at} />
-  {#if ready && data.status == 200}
   {#if data.createFile}
   <section class="pt-8  h-screen w-full  grid place-items-center">
     <div class="p-6 w-full max-w-lg ">
