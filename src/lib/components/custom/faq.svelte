@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "$lib/components/ui/button/button.svelte";
+  import { socials } from "$lib/data/socialLinks";
   import { BxQuestionMark } from "svelte-boxicons";
 </script>
 <div class="bg-white py-6 sm:py-8 lg:py-12">
@@ -98,9 +99,9 @@
         </div>
 
         <p class="text-gray-700">
-          Simply head on to the <Button href="/add" variant="link" size="sm"
+          Simply head on to the <Button href={socials.whatsapp.community} variant="link" size="sm"
             >WhatsApp group</Button
-          > or go to the <Button href="/download" variant="link" size="sm"
+          > or go to the <Button href={socials.telegram} variant="link" size="sm"
             >Telegram channel</Button
           > to download the VCF file.
         </p>
@@ -144,7 +145,7 @@
         </div>
 
         <p class="text-gray-700">
-          <Button href="/add" variant="secondary" size="sm">Click here</Button> to
+          <Button href={socials.whatsapp.admin} variant="secondary" size="sm">Click here</Button> to
           chat with the admin concerning permanent verification & pricing.
         </p>
       </div>

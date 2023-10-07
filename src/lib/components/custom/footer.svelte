@@ -1,5 +1,6 @@
 <script>
-  import { BxlTelegram, BxlWhatsapp, BxlWhatsappSquare } from "svelte-boxicons";
+  import { socials } from "$lib/data/socialLinks";
+  import { BxlTelegram, BxlTwitter, BxlWhatsapp, BxlWhatsappSquare } from "svelte-boxicons";
 
 </script>
 <div class="bg-white pt-4 sm:pt-10 lg:pt-12">
@@ -16,13 +17,16 @@
 
       <!-- social - start -->
       <div class="flex gap-4">
-        <a href="/" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+        <a href={socials.whatsapp.community} target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
          <BxlWhatsapp/>
         </a>
 
-        <a href="/" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+        <a href={socials.telegram} target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
          <BxlTelegram/>
         </a>       
+        <!-- <a href={socials.twitter} target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+         <BxlTwitter/>
+        </a>        -->
       </div>
       <!-- social - end -->
     </div>

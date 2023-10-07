@@ -7,6 +7,7 @@
   import { CheckmarkIcon } from "svelte-french-toast";
   import { addToast } from "$lib/scripts/helper/toaster";
   import Footer from "$lib/components/custom/footer.svelte";
+  import {socials} from '$lib/data/socialLinks'
   const copyData: string = ` Grow your whatsapp views with this amazing tool!🔥🔥 Gain up to *1k views* by using wabuzz to gain active whatsapp contacts🚀. start gaining here: https://wabuzz.vercel.app`;
   let copied: boolean = false;
   async function copyContent(text: string) {
@@ -61,7 +62,7 @@
         Share the copied text on your status and once it reaches <b>30 views</b
         >, send a screenshot to the submission channel of wabuzz
         whatsapp community. Join it <a
-          href="/"
+          href={socials.whatsapp.submission}
           target="_blank"
          
           class="!p-0 !m-0 lowercase text-primary hover:border-b border-primary font-head"
@@ -81,7 +82,7 @@
 
       <li in:fly={{ y: 20, delay: 600 }}>
         You can find this tasks in our <Button
-          href="/"
+          href={socials.whatsapp.community}
           variant="link"
           class="p-0 m-0 lowercase"
         >

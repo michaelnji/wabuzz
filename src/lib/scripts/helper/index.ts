@@ -7,7 +7,7 @@ import vCardsJS from "vcards-js";
 
 export const toggleUserGuide = (state: boolean): boolean => {
   setItemValue("show-notice", !state);
-  return !state; 
+  return !state;
 };
 
 export const isValidName = (name: string = ""): boolean => {
@@ -15,7 +15,6 @@ export const isValidName = (name: string = ""): boolean => {
   const found: boolean = re.test(name);
   return found;
 };
-
 
 export const isValidPhone = (phone: string = ""): boolean => {
   const re = /^[0-9]+$/g;
@@ -35,28 +34,30 @@ export const sanitizer = (dirtyString: string): string => {
 export const saveVcfFile = (vcfData: string) => {
   try {
     const blob = new Blob([vcfData], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, `vCard_0${uuidv4()}.vcf`);
+    saveAs(blob, `WABUZZ_0${uuidv4()}.vcf`);
   } catch (err) {
-   return err
+    return err;
   }
 };
 
-export const createVcard = (data: ContactDetails[] | unknown, batch:string): string => {
-    const vCard = vCardsJS();
-    let finalVcard = "";
+export const createVcard = (
+  data: ContactDetails[] | unknown,
+  batch: string
+): string => {
+  const vCard = vCardsJS();
+  let finalVcard = "";
   if (isArray(data)) {
-      data.forEach((e) => {
-        vCard.cellPhone = e.phone;
-        vCard.name = `wabuzz-${batch}`;
-        vCard.firstName = e.name;
-        finalVcard = finalVcard + vCard.getFormattedString();
-      });
-   }
+    data.forEach((e) => {
+      vCard.cellPhone = e.phone;
+      vCard.name = `wabuzz-${batch}`;
+      vCard.firstName = e.name;
+      finalVcard = finalVcard + vCard.getFormattedString();
+    });
+  }
 
-    return finalVcard
-    
-}
+  return finalVcard;
+};
 
-export const isEmptyObject = (obj: object)=>{
-  return JSON.stringify(obj) === '{}'
-}
+export const isEmptyObject = (obj: object) => {
+  return JSON.stringify(obj) === "{}";
+};
