@@ -10,6 +10,9 @@ dependencies:
   '@fontsource-variable/raleway':
     specifier: ^5.0.9
     version: 5.0.9
+  '@odusanya/african-countries':
+    specifier: ^2.2.2
+    version: 2.2.2
   '@supabase/supabase-js':
     specifier: ^2.36.0
     version: 2.36.0
@@ -60,6 +63,12 @@ devDependencies:
   '@fontsource/martian-mono':
     specifier: ^5.0.8
     version: 5.0.8
+  '@prgm/sveltekit-progress-bar':
+    specifier: ^1.0.0
+    version: 1.0.0(@sveltejs/kit@1.20.4)
+  '@svelte-put/copy':
+    specifier: ^3.0.0
+    version: 3.0.0
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.0.0(@sveltejs/kit@1.20.4)
@@ -535,8 +544,21 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
+  /@odusanya/african-countries@2.2.2:
+    resolution: {integrity: sha512-Y0eipN6I/xpkiQ5dLJ6GCXvqMmNfN+mMQBLZ14i2KlQercHgK7PiifgLKs8WTXIXlxDlapuqk+6iZskMSaW8Lg==}
+    dev: false
+
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
+    dev: true
+
+  /@prgm/sveltekit-progress-bar@1.0.0(@sveltejs/kit@1.20.4):
+    resolution: {integrity: sha512-E32QXXaeaWt8S3m/jPV+c/k3Jun2+CFtonvg66gm1izEJ3dx1xAJkxfNJdZQWcv9Jy75zSiB8jpEfOxnsxOKzw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@sveltejs/kit': ^1.0.0
+    dependencies:
+      '@sveltejs/kit': 1.20.4(svelte@4.0.5)(vite@4.4.2)
     dev: true
 
   /@rollup/pluginutils@4.2.1:
@@ -604,6 +626,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /@svelte-put/copy@3.0.0:
+    resolution: {integrity: sha512-zfQ68bTC1Mmfairu0fN5y5NPkXV7XUjuPsP+Ntqb8TD6xTa8czBLvgsFxUzOT8hcxfHyXJ8acIhK9V4xgpE94w==}
+    dev: true
 
   /@sveltejs/adapter-auto@2.0.0(@sveltejs/kit@1.20.4):
     resolution: {integrity: sha512-b+gkHFZgD771kgV3aO4avHFd7y1zhmMYy9i6xOK7m/rwmwaRO8gnF5zBc0Rgca80B2PMU1bKNxyBTHA14OzUAQ==}

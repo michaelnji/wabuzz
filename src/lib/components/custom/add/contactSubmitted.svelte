@@ -38,8 +38,9 @@
           <li>
             Share the copied text on your status and once it reaches <b
               >30 views</b
-            >, send a screenshot to the admin of wabuzz. Save their contact <Button
+            >, send a screenshot to the screenshot submission channel of wabuzz whatsapp community. Join it <Button
               href="/"
+              target='_blank'
               variant="link"
               class="p-0 m-0 lowercase"
             >
@@ -52,7 +53,7 @@
             this batch.
           </li>
           <li>
-           Please make sure you submit your screenshot 24hours before the day the VCF file drops.
+           Please make sure you submit your screenshot 24hours before the VCF file drops.
           </li>
           <li class="fleX w-full items-center">
             Come back to wabuzz <Badge

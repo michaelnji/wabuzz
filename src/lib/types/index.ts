@@ -32,5 +32,6 @@ export type BatchResponse = {
   status: number,
   error: string | null
   createFile: boolean,
-  archived_at: Date | string
+  archived_at: Date | string,
+  expires: Date | string
 }

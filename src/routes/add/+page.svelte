@@ -16,6 +16,7 @@
   import { Loader } from "lucide-svelte";
   import ContactExistsNotice from "$lib/components/custom/add/contactExistsNotice.svelte";
   import { v4 as uuidv4 } from "uuid";
+  import { goto } from "$app/navigation";
 
   let selectedCountryCode: unknown = "xxx";
   let name: string = "";
@@ -26,7 +27,6 @@
   let phoneNotValid: boolean = false;
   let isloading: boolean = false;
   let contactExists: boolean = false;
-  let submitted: boolean = false;
   let contact: ContactDetails;
 
   const { form } = createForm({
@@ -49,7 +49,6 @@
         return;
       }
       contactExists = false;
-      submitted = false;
       isloading = true;
       const userDetail: ContactDetails = {
         name: sanitizer(name),
@@ -71,7 +70,6 @@
 
       let data = await res.json();
       isloading = false;
-
       let { status, data: contactInfo, message } = data;
 
       if (status == 500) {
@@ -84,8 +82,9 @@
         contactExists = true;
         return;
       }
-      submitted = true;
+     
       addToast(message, "success");
+      goto('/add/task')
       return;
     },
   });
@@ -104,7 +103,7 @@
 
 <UserNotice />
 <ContactExistsNotice showNotice={contactExists} details={contact} />
-<ContactSubmitted showNotice={submitted} />
+
 <div class="w-screen h-screen grid place-items-center bg-muted">
   <div class="bg-white py-6 md:rounded-xl border sm:py-8 lg:py-12 px-6">
     <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
@@ -157,7 +156,7 @@
                 <Select.Value placeholder="Select a country" />
               </Select.Trigger>
               <Select.Content>
-                <Select.Group>
+                <Select.Group class='overflow-y-scroll'>
                   <Select.Label>Country</Select.Label>
                   {#each countries as country}
                     <Select.Item value={country.value} label={country.label}

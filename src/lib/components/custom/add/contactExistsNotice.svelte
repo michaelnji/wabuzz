@@ -3,8 +3,7 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import * as Dialog from "$lib/components/ui/dialog";
   import type { ContactDetails } from "$lib/types";
-  import { flyAndScale } from "$lib/utils";
-  import { fly } from "svelte/transition";
+ 
 
   export let showNotice: boolean = false;
   export let details: ContactDetails;
@@ -43,20 +42,29 @@
           <div class="my-2 border w-full opacity-60 dark:border-gray-600" />
           <p class="flex items-center gap-x-2">
             <span class="opacity-80">Verification status</span>
-            <span class="font-head font-medium"
-              ><Badge
+            <span class=" font-medium text-md"
+              >
+              {#if details.verification_status === 'permanently verified' || details.verification_status === 'verified'}
+                <Badge class='text-md'
+                variant={'default'}>{details.verification_status}</Badge
+              >
+              {:else}
+                <Badge class='text-md'
                 variant={details.verification_status == "banned"
                   ? "destructive"
                   : "secondary"}>{details.verification_status}</Badge
-              ></span
+              >
+              {/if}
+
+              </span
             >
           </p>
           {#if details.verification_status == "banned"}
             <div class="my-2 border w-full opacity-60 dark:border-gray-600" />
             <p class="flex items-center gap-x-2">
               <span class="opacity-80">Reason for ban</span>
-              <span class="font-head font-medium"
-                ><Badge variant="secondary">{details.ban_reason}</Badge></span
+              <span class="font-head font-medium text-md"
+                >{details.ban_reason}</span
               >
             </p>
           {/if}

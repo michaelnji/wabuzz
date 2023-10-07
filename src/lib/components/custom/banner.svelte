@@ -1,17 +1,44 @@
 <script lang="ts">
-  import { Badge } from "$lib/components/ui/badge";
+  import Time from "svelte-time";
+  import { addDays, isTomorrow} from 'date-fns'
+  import { getReadableDate } from "$lib/scripts/helper/time";
+  export let date: Date | number;
+  export let name : string = 'batch-0'
+export let finishes : Date | number
+  // const yesterday = 
 </script>
 
-<!-- banner - start -->
-<div
-  class=" bg-primary px-4 py-3 flex items-center justify-center sm:pr-8 md:px-8"
->
+{#if date}
+  {#if getReadableDate(finishes) == getReadableDate(addDays(new Date(), 1))}
+   <!-- banner - start -->
   <div
-    class="order-1  mx-auto items-center font-head mb-2 max-w-screen-sm text-base text-white sm:order-none sm:mb-0 sm:w-auto md:text-md"
+    class=" bg-primary/10 px-4 py-3 flex items-center justify-center sm:pr-8 md:px-8"
   >
-     File drops in <b>02 days 01 hour(s)</b>
-  </div>
+    <div
+      class="order-1 mx-auto items-center font-head mb-2 max-w-screen-sm text-base text-primary/90 sm:order-none sm:mb-0 sm:w-auto md:text-md"
+    >
+      <span class="capitalize">{name}</span> available till <b>
+        <Time timestamp={finishes} />
+      </b>
+    </div>
 
-  <!-- close button - start -->
-</div>
-<!-- banner - end -->
+  </div>
+  <!-- banner - end -->
+
+  {:else if isTomorrow(addDays(new Date(), 1))}
+    <!-- banner - start -->
+  <div
+    class=" bg-primary/10 px-4 py-3 flex items-center justify-center sm:pr-8 md:px-8"
+  >
+    <div
+      class="order-1 mx-auto items-center font-head mb-2 max-w-screen-sm text-base text-primary/90 sm:order-none sm:mb-0 sm:w-auto md:text-md"
+    >
+      <span class="capitalize">{name}</span> drops <b>
+        <Time timestamp={date}  />
+      </b>
+    </div>
+
+  </div>
+  <!-- banner - end -->
+  {/if}
+{/if}

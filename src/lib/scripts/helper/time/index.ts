@@ -3,7 +3,7 @@ import { isString} from 'mathjs'
 
 export const calculateBatchExpiry = (
   date: Date | number,
-  amount: number = 4
+  amount: number = 1
 ) => {
   return addDays(date, amount);
 };

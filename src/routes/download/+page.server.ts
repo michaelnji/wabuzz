@@ -1,15 +1,13 @@
-import { createVcard } from "$lib/scripts/helper";
+ import { createVcard } from "$lib/scripts/helper";
 import {
   calculateBatchExpiry,
   getReadableDate,
 } from "$lib/scripts/helper/time";
 import {
-  createNewBatch,
   getOrCreateBatch,
   updateBatchInfo,
 } from "$lib/server/supabase/batchManager";
 import {
-  deleteUnverifiedContacts,
   getVerifiedContacts,
 } from "$lib/server/supabase/contactsManager";
 import type { Batch, BatchResponse } from "$lib/types";
@@ -61,38 +59,7 @@ export const load: Load = async () => {
       return res;
     }
 
-    if (getReadableDate(today) === getReadableDate(batch.archived_at)) {
-      // archiving batch
-      batch.batch_status = "archived";
-      batch = await updateBatchInfo({ ...batch }, batch.id);
-      if (batch && batch.error) return batch;
-
-      // deleting contacts in preparation for new batch
-      const delError = await deleteUnverifiedContacts();
-      if (delError) return delError;
-
-      // creating new batch
-      batchDetails.name = `batch-${
-        parseInt(batch.name.split("batch-")[1]) + 1
-      }`;
-
-      batch = await createNewBatch(batchDetails);
-      if (batch && batch.error) return batch;
-
-      // returning data
-      const res: BatchResponse = {
-        content: batch.content,
-        name: batch.name,
-        archived_at: batch.archived_at,
-        amount: batch.amount,
-        expires: batch.expires,
-        status: 200,
-        error: null,
-        createFile: false,
-      };
-
-      return res;
-    }
+    
   }
 
   const res: BatchResponse = {
