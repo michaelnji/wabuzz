@@ -9,7 +9,7 @@
 </script>
 
 <div class="navbar-wrapper !z-10 md:top-4">
-	<Button variant='default' class='rounded-full shadow-lg z-10 p-4 md:p-8' size='icon'
+	<Button variant='default' class='rounded-full shadow-lg z-10 p-6 md:p-8' size='icon'
 		on:click={() => {
 			closeModal = !closeModal;
 		}}

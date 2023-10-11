@@ -81,7 +81,7 @@
           <li in:fly={{ y: 20, delay: 400 }}>DO NOT SUBMIT YOUR CONTACT UNTIL TOMORROW</li>
         </ul>
       </div>
-      <div class="bg-white rounded-xl border p-3 mt-8 w-full" in:fly={{ x: 60, delay: 350 }}>
+      <div class="bg-white rounded-xl border p-3 mt-8 w-full" in:fly={{ y: 60, delay: 350 }}>
         <div class="flex items-center justify-between">
           <div
             class="flex items-center gap-x-2 text-xs sm:text-sm md:text-base"
