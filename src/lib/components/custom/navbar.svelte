@@ -1,25 +1,57 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { setItemValue } from '$lib/scripts/dbManager';
-	import theme from '$lib/stores/theme';
-	import { IconMini, IconOutline, IconSolid } from 'svelte-heros-v2';
+  import { MenuIcon, XIcon } from 'lucide-svelte';
 	import { fade, fly, scale } from 'svelte/transition';
+  import Button from '../ui/button/button.svelte';
 	let closeModal: boolean = false;
-	function toggleTheme(): void {
-		if ($theme === 'dark') {
-			$theme = setItemValue('theme', 'light');
-			return;
-		}
-		$theme = setItemValue('theme', 'dark');
-	}
+	
 	$: currentSection = $page.url.pathname;
 </script>
 
-<div class="navbar-wrapper !z-10">
+<div class="navbar-wrapper !z-10 md:top-4">
+	<Button variant='default' class='rounded-full shadow-lg z-10 p-4 md:p-8' size='icon'
+		on:click={() => {
+			closeModal = !closeModal;
+		}}
+	>
+		{#key closeModal}
+			{#if !closeModal}
+				<div in:scale={{ duration: 300 }}>
+					<MenuIcon
+						class="focus:!outline-none hidden md:block"
+						size="32"
+						
+						
+					/>
+					<MenuIcon
+						class="focus:!outline-none md:hidden"
+						size="26"
+						
+						
+					/>
+				</div>
+			{:else}
+				<div in:scale={{ duration: 300 }}>
+					<XIcon
+						class="focus:!outline-none hidden md:block"
+						size="32"
+						
+						
+					/>
+					<XIcon
+						class="focus:!outline-none md:hidden"
+						size="26"
+						
+						
+					/>
+				</div>
+			{/if}
+		{/key}
+	</Button>
 	{#if closeModal}
 		<div
-			class="navbar-container dark:!border-base-100 dark:!bg-base-300 dark:!text-gray-50"
-			in:fly={{ y: 200 }}
+			class="navbar-container "
+			in:fly={{ y: -200 }}
 			out:fade={{ duration: 100 }}
 			on:blur={() => {
 				closeModal = !closeModal;
@@ -27,71 +59,89 @@
 		>
 			<div class="nav-start justify-between flex items-center w-full">
 				<div>
-					<a href="/" class="logo"><span class="font-extrabold text-primary">マイケル</span> Nji</a>
+					<a href="/" class="logo font-extrabold "><span class="text-primary">WA</span>BUZZ</a>
 				</div>
-				<button
-					class="btn btn-ghost dark:!text-gray-50 shadow-lg overflow-hidden !rounded-full dark:hover:!bg-gray-50 dark:hover:!bg-opacity-5"
-					on:click={toggleTheme}
-				>
-					{#key $theme}
-						{#if $theme == 'light'}
-							<div in:scale={{ duration: 400 }}>
-								<IconSolid
-									name="moon-solid"
-									class="focus:!outline-none"
-									width="24"
-									height="24"
-									tabindex="-1"
-								/>
-							</div>
-						{:else}
-							<div in:scale={{ duration: 400 }}>
-								<IconSolid
-									name="sun-solid"
-									class="focus:!outline-none"
-									width="24"
-									height="24"
-									tabindex="-1"
-								/>
-							</div>
-						{/if}
-					{/key}
-				</button>
+				
 			</div>
-			<div class="divider dark:!border-base-100" />
+			<div class="w-full border border-gray-700 border-opacity-10" />
 			<nav class="nav-center">
 				<ul>
 					<li>
 						<a
-							href="/#about"
+							href="/"
 							class="nav-item"
-							class:!bg-primary={currentSection === '/#about'}
-							class:!bg-opacity-30={currentSection === '/#about'}
-							class:!text-primary={currentSection === '/#about'}
+							class:!bg-primary={currentSection === '/'}
+							class:!bg-opacity-30={currentSection === '/'}
+							class:text-white={currentSection === '/'}
+							class:rounded-full={currentSection === '/'}
 							on:click={() => {
 								closeModal = !closeModal;
 							}}
 						>
-							ABOUT
+							HOME
 						</a>
 					</li>
 					<li>
 						<a
-							class:bg-primary={currentSection === '/#projects'}
-							class:bg-opacity-30={currentSection === '/#projects'}
-							class:text-primary={currentSection === '/#projects'}
-							href="/#projects"
+							class:bg-primary={currentSection === '/add'}
+							class:!bg-opacity-30={currentSection === '/add'}
+							class:text-white={currentSection === '/add'}
+							class:rounded-full={currentSection === '/add'}
+							href="/add"
 							class="nav-item"
 							on:click={() => {
 								closeModal = !closeModal;
 							}}
 						>
-							PROJECTS
+							SUBMIT CONTACT
 						</a>
 					</li>
 					<li>
-						<a href="https://github.com/michaelnji" class="nav-item"> GITHUB </a>
+						<a
+							class:bg-primary={currentSection === '/download'}
+							class:bg-opacity-30={currentSection === '/download'}
+							class:text-white={currentSection === '/download'}
+							class:rounded-full={currentSection === '/download'}
+							href="/download"
+							class="nav-item"
+							on:click={() => {
+								closeModal = !closeModal;
+							}}
+						>
+							DOWNLOAD FILE
+						</a>
 					</li>
+					<li>
+						<a
+							class:bg-primary={currentSection === '/privacy-policy'}
+							class:bg-opacity-30={currentSection === '/privacy-policy'}
+							class:text-white={currentSection === '/privacy-policy'}
+							class:rounded-full={currentSection === '/privacy-policy'}
+							href="/privacy-policy"
+							class="nav-item"
+							on:click={() => {
+								closeModal = !closeModal;
+							}}
+						>
+							PRIVACY POLICY
+						</a>
+					</li>
+					<li>
+						<a
+							class:bg-primary={currentSection === '/terms'}
+							class:bg-opacity-30={currentSection === '/terms'}
+							class:text-white={currentSection === '/terms'}
+							class:rounded-full={currentSection === '/terms'}
+							href="/terms"
+							class="nav-item"
+							on:click={() => {
+								closeModal = !closeModal;
+							}}
+						>
+							TERMS
+						</a>
+					</li>
+					
 					<!-- <li>
 						<a href="/" class="nav-item"> BLOG </a>
 					</li>
@@ -100,61 +150,18 @@
 					</li> -->
 				</ul>
 			</nav>
-			<div class="divider dark:!border-base-100" />
+			<div class="w-full border border-gray-700 border-opacity-10 dark:!border-base-100" />
 			<div class="nav-end">
 				<p class="text-xs px-3 opacity-70">Designed and developed in CMR with 💻 & 🎧</p>
 			</div>
 		</div>
 	{/if}
-	<button
-		class="btn !z-20 md:btn-lg btn-primary shadow-lg overflow-hidden !rounded-full"
-		on:click={() => {
-			closeModal = !closeModal;
-		}}
-	>
-		{#key closeModal}
-			{#if !closeModal}
-				<div in:scale={{ duration: 400 }}>
-					<IconSolid
-						name="bars-3-solid"
-						class="focus:!outline-none hidden md:block"
-						width="48"
-						height="48"
-						tabindex="-1"
-					/>
-					<IconSolid
-						name="bars-3-solid"
-						class="focus:!outline-none md:hidden"
-						width="36"
-						height="36"
-						tabindex="-1"
-					/>
-				</div>
-			{:else}
-				<div in:scale={{ duration: 400 }}>
-					<IconSolid
-						name="x-mark-solid"
-						class="focus:!outline-none hidden md:block"
-						width="48"
-						height="48"
-						tabindex="-1"
-					/>
-					<IconSolid
-						name="x-mark-solid"
-						class="focus:!outline-none md:hidden"
-						width="36"
-						height="36"
-						tabindex="-1"
-					/>
-				</div>
-			{/if}
-		{/key}
-	</button>
+	
 </div>
 
 <style lang="postcss">
 	.navbar-wrapper {
-		@apply fixed bottom-4 flex flex-col   items-end gap-y-4  right-4;
+		@apply fixed top-8 flex flex-col   items-end gap-y-4  right-4;
 	}
 	.navbar-container {
 		@apply bg-white border shadow-lg border-gray-200 py-6 px-3 rounded-2xl w-full flex flex-col items-start gap-y-2;
@@ -173,7 +180,7 @@
 	}
 
 	.nav-center ul li:hover {
-		@apply bg-base-300 text-base-300 bg-opacity-10;
+		@apply bg-gray-300 text-muted-foreground bg-opacity-10;
 	}
 	.dark .nav-center ul li:hover {
 		@apply bg-gray-50 text-gray-50 bg-opacity-10;
