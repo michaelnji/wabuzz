@@ -45,7 +45,6 @@ export const load: Load = async () => {
   batch = await updateBatchInfo({ ...batch }, batch.id);
   if (batch && batch.error) return batch;
 
-  console.log(!isPast(parseISO(batch.archived_at)));
 
   // not a new batch
   if (getReadableDate(batch.expires) != getReadableDate(expiryDate)) {
