@@ -24,7 +24,6 @@
       isLoading = false;
     }, 2000);
   }
-  console.log(data)
 
   onMount(() => {
     ready = true;
@@ -32,24 +31,24 @@
   });
 </script>
 
-{#if ready && data.status == 200}
-<Banner date={data.expires} name={data.name} finishes={data.archived_at} />
-  {#if data.createFile}
-  <section class="pt-8  h-screen w-full  grid place-items-center">
-    <div class="p-6 w-full max-w-lg ">
+{#if ready && data.status == 200 && data.createFile}
+  <Banner date={data.expires} name={data.name} finishes={data.archived_at} />
+
+  <section class="pt-8 h-screen w-full grid place-items-center">
+    <div class="p-6 w-full max-w-lg">
       <h1
-        in:fly={{ y: -20, delay: 100, duration: 300 }}
-        class="mb-3  font-head scroll-m-20 text-5xl font-extrabold tracking-tight text-center"
+        in:fly={{ y: -30, delay: 100, duration: 300 }}
+        class="mb-3 font-head scroll-m-20 text-5xl font-extrabold tracking-tight text-center"
       >
         Get VCF file
       </h1>
 
-      <p in:fade class="text-base text-muted-foreground text-center">
+      <p in:fade={{  delay: 150 }} class="text-base text-muted-foreground text-center">
         <b class="text-primary">{data.name}</b> is now complete and its file is available
         for download
       </p>
 
-      <div class="bg-white p-5 rounded-xl border  mt-8 w-full " in:fade>
+      <div class="bg-white p-5 rounded-xl border mt-8 w-full" in:fly={{ y: 80, delay: 100 }}>
         <h2
           in:fly={{ y: -20 }}
           class="scroll-m-20 text-3xl font-bold tracking-tight font-head mb-4"
@@ -60,28 +59,29 @@
         <ul
           class="list-disc list-outside pl-4 space-y-2 mx-auto max-w-md text-muted-foreground"
         >
-          <li>Contacts gained from this site are for business use only!</li>
-          <li>
+          <li in:fly={{ y: 20, delay: 150 }}>Contacts gained from this site are for business use only!</li>
+          <li in:fly={{ y: 20, delay: 200 }}>
             We have a <b>strict no-spam policy</b>. read more
             <a href="/terms" class="underline text-primary">here</a>.
           </li>
 
-          <li>
+          <li in:fly={{ y: 20, delay: 250 }}>
             Before making any monetary transactions with these contacts, please
             contact the wabuzz admin.
           </li>
-          <li>
+          <li in:fly={{ y: 20, delay: 300 }}>
             The admin's contact is found in this file and is stored as
             admin@wabuzz
           </li>
-          <li>
-            All contacts gained from this website are prefixed with <Badge
-              variant="outline">wabuzz</Badge
+          <li in:fly={{ y: 20, delay: 350 }}>
+            All contacts in this file are prefixed with <Badge variant="outline"
+              >wb</Badge
             >
           </li>
+          <li in:fly={{ y: 20, delay: 400 }}>DO NOT SUBMIT YOUR CONTACT UNTIL TOMORROW</li>
         </ul>
       </div>
-      <div class="bg-white  rounded-xl border p-3 mt-8 w-full " in:fade>
+      <div class="bg-white rounded-xl border p-3 mt-8 w-full" in:fly={{ x: 60, delay: 350 }}>
         <div class="flex items-center justify-between">
           <div
             class="flex items-center gap-x-2 text-xs sm:text-sm md:text-base"
@@ -99,37 +99,46 @@
       </div>
     </div>
   </section>
-    {:else}
-<section class="pt-8  h-screen w-full  grid place-items-center">
-    <div class='max-w-lg mx-auto '>
-      <img src={f} class='max-w-md' in:fly={{ y: 40 }} alt='file illustration'/>
-       <h2
-          in:fly={{ y: -20 }}
-          class="scroll-m-20 text-3xl text-center tracking-tight font-head mb-4"
-        >
-         The file is not yet available for download
-        </h2>
-        <p class="opacity-80 text-center text-md" in:fade >Please come back again  later</p>
+   <Footer />
+{:else if ready && data.status == 200 && !data.createFile}
+  <Banner date={data.expires} name={data.name} finishes={data.archived_at} />
+  <section class="pt-8 h-screen w-full grid place-items-center">
+    <div class="max-w-lg mx-auto">
+      <img
+        src={f}
+        class="max-w-md"
+        in:fly={{ y: 40 }}
+        alt="file illustration"
+      />
+      <h2
+        in:fly={{ y: -20 }}
+        class="scroll-m-20 text-3xl text-center tracking-tight font-head mb-4"
+      >
+        The file is not yet available for download
+      </h2>
+      <p class="opacity-80 text-center text-md" in:fade>
+        Please come back again later
+      </p>
     </div>
   </section>
 
-    {/if}
-    
-    <Footer />
+  <Footer />
 {:else if data.status == 500}
-<section class="pt-8  h-screen w-full  grid place-items-center">
-
- <div class='max-w-lg  mx-auto '>
-      <img src={e} class='max-w-md' alt='error 404 illustration'/>
-       <h2
-          in:fly={{ y: -20 }}
-          class="scroll-m-20 text-3xl text-center tracking-tight font-head mb-4"
-        >
-      An error seems to have occurred
-        </h2>
-        <p class="opacity-80 text-center text-md">This is surely related to your internet connection.</p>
+  <section class="pt-8 h-screen w-full grid place-items-center">
+    <div class="max-w-lg mx-auto">
+      <img src={e} class="max-w-md" alt="error 404 illustration" />
+      <h2
+        in:fly={{ y: -20 }}
+        class="scroll-m-20 text-3xl text-center tracking-tight font-head mb-4"
+      >
+        An error seems to have occurred
+      </h2>
+      <p class="opacity-80 text-center text-md">
+        This is surely related to your internet connection.
+      </p>
     </div>
   </section>
+   <Footer />
 {:else}
- <Loading/>
+  <Loading />
 {/if}

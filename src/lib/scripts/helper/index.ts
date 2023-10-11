@@ -49,7 +49,7 @@ export const createVcard = (
   if (isArray(data)) {
     data.forEach((e) => {
       vCard.cellPhone = e.phone;
-      vCard.name = `wabuzz-${batch}`;
+      vCard.name = `wb-${batch}`;
       vCard.firstName = e.name;
       finalVcard = finalVcard + vCard.getFormattedString();
     });
