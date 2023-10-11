@@ -4,14 +4,17 @@ import {
   getReadableDate,
 } from "$lib/scripts/helper/time";
 import {
+  createNewBatch,
   getOrCreateBatch,
   updateBatchInfo,
 } from "$lib/server/supabase/batchManager";
 import {
+  deleteUnverifiedContacts,
   getVerifiedContacts,
 } from "$lib/server/supabase/contactsManager";
 import type { Batch, BatchResponse } from "$lib/types";
 import type { Load } from "@sveltejs/kit";
+import { isPast, parseISO } from "date-fns";
 import { isArray } from "mathjs";
 import { v4 as uuidv4 } from "uuid";
 
@@ -45,7 +48,10 @@ export const load: Load = async () => {
   // not a new batch
   if (getReadableDate(batch.expires) != getReadableDate(expiryDate)) {
     // make file available cuz today's da day boys
-    if (getReadableDate(today) === getReadableDate(batch.expires)) {
+    if (
+      getReadableDate(today) === getReadableDate(batch.expires) ||
+      (isPast(parseISO(batch.expires)) && !isPast(parseISO(batch.archived_at)))
+    ) {
       const res: BatchResponse = {
         content: batch.content,
         name: batch.name,
@@ -60,7 +66,41 @@ export const load: Load = async () => {
     }
 
     
+    if (
+      getReadableDate(today) === getReadableDate(batch.archived_at) ||
+      isPast(parseISO(batch.archived_at))
+    ) {
+      // archiving batch
+      batch.batch_status = "archived";
+      batch = await updateBatchInfo({ ...batch }, batch.id);
+      if (batch && batch.error) return batch;
+  
+      // deleting contacts in preparation for new batch
+      const delError = await deleteUnverifiedContacts();
+      if (delError) return delError;
+  
+      // creating new batch
+      batchDetails.name = `batch-${parseInt(batch.name.split("batch-")[1]) + 1}`;
+  
+      batch = await createNewBatch(batchDetails);
+      if (batch && batch.error) return batch;
+  
+      // returning data
+      const res: BatchResponse = {
+        content: batch.content,
+        name: batch.name,
+        archived_at: batch.archived_at,
+        amount: batch.amount,
+        expires: batch.expires,
+        status: 200,
+        error: null,
+        createFile: false,
+      };
+  
+      return res;
+    }
   }
+
 
   const res: BatchResponse = {
     content: batch.content,

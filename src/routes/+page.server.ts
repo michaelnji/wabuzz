@@ -14,6 +14,7 @@ import {
 } from "$lib/server/supabase/contactsManager";
 import type { Batch, BatchResponse } from "$lib/types";
 import type { Load } from "@sveltejs/kit";
+import { isPast, parseISO } from "date-fns";
 import { isArray } from "mathjs";
 import { v4 as uuidv4 } from "uuid";
 
@@ -44,10 +45,15 @@ export const load: Load = async () => {
   batch = await updateBatchInfo({ ...batch }, batch.id);
   if (batch && batch.error) return batch;
 
+  console.log(!isPast(parseISO(batch.archived_at)));
+
   // not a new batch
   if (getReadableDate(batch.expires) != getReadableDate(expiryDate)) {
     // make file available cuz today's da day boys
-    if (getReadableDate(today) === getReadableDate(batch.expires)) {
+    if (
+      getReadableDate(today) === getReadableDate(batch.expires) ||
+      (isPast(parseISO(batch.expires)) && !isPast(parseISO(batch.archived_at)))
+    ) {
       const res: BatchResponse = {
         content: batch.content,
         name: batch.name,
@@ -61,7 +67,10 @@ export const load: Load = async () => {
       return res;
     }
 
-    if (getReadableDate(today) === getReadableDate(batch.archived_at)) {
+    if (
+      getReadableDate(today) === getReadableDate(batch.archived_at) ||
+      isPast(parseISO(batch.archived_at))
+    ) {
       // archiving batch
       batch.batch_status = "archived";
       batch = await updateBatchInfo({ ...batch }, batch.id);
