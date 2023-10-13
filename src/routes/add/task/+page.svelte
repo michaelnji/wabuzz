@@ -2,7 +2,7 @@
   import Badge from "$lib/components/ui/badge/badge.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
   import * as Alert from "$lib/components/ui/alert";
-  import { CheckCircle2, CopyCheckIcon, CopyIcon } from "lucide-svelte";
+  import { CheckCircle2, CheckIcon, CopyCheckIcon, CopyIcon } from "lucide-svelte";
   import { fly } from "svelte/transition";
   import { CheckmarkIcon } from "svelte-french-toast";
   import { addToast } from "$lib/scripts/helper/toaster";
@@ -25,12 +25,12 @@
 </script>
 
 <div class="w-full grid overflow-x-hidden place-items-center  p-6">
-  <div class="max-w-lg bg-white border rounded-lg p-6">
+  <div class="max-w-2xl bg-white border rounded-lg p-6">
     <h2
       in:fly={{ y: -20 }}
       class="scroll-m-20 text-3xl font-bold tracking-tight font-head mb-2 flex items-center gap-x-2"
     >
-      Contact Submitted <CheckmarkIcon />
+      Contact Submitted <CheckIcon />
     </h2>
     <p class=" w-full text-muted-foreground" in:fly={{ y: 20, delay: 100 }}>
       Your contact has been successfully submitted to the wabuzz system. Please
@@ -47,12 +47,12 @@
           on:click={async () => {
             copyContent(copyData);
           }}
-          variant="secondary"
+          variant="outline"
           size="sm"
           class="absolute bottom-1 right-1 text-xs"
         >
          {#if copied}
-          <CheckCircle2 size='18' />
+          <CheckIcon size='18' />
          {:else}
           <CopyIcon size="18" />
          {/if}
