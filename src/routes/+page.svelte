@@ -11,6 +11,7 @@
   import { addToast } from "$lib/scripts/helper/toaster/index.js";
   import { Loader } from "lucide-svelte";
   import Loading from "$lib/components/custom/loading.svelte";
+  import Stats from "$lib/components/custom/stats.svelte";
   export let data
   let ready:boolean = false
 
@@ -26,19 +27,19 @@
 <div class="bg-white pb-6 sm:pb-8 lg:pb-12 pt-12">
   <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
     <section
-      class="flex flex-col justify-between gap-6 sm:gap-10 xl:flex-row overflow-x-hidden"
+      class="flex flex-col justify-center items-center  gap-6 sm:gap-10  overflow-x-hidden"
     >
       <!-- content - start -->
-      <div class="flex flex-col justify-between xl:w-5/12">
+      <div class="flex flex-col justify-between">
         <!-- <div /> -->
 
-        <div class="text-center lg:py-12 lg:text-left">
+        <div class="text-center lg:py-12 ">
           <p in:fly={{x:-20, duration:500}} class="mb-2 md:text-lg xl:text-xl">
            Formerly known as <b class="text-primary">Whatsgrow</b>
           </p>
 
           <h1 in:fly={{y:-20,delay:100, duration:300}}
-            class="mb-8  text-black  md:mb-12 font-head scroll-m-20 text-5xl font-extrabold tracking-tight md:text-8xl text-center lg:text-left"
+            class="mb-8  text-black  md:mb-12 font-head scroll-m-20 text-5xl font-extrabold tracking-tight md:text-8xl text-center "
            
           >
             Want to have higher views on WhatsApp? try w/<span class="text-primary"
@@ -47,7 +48,7 @@
           </h1>
 
           <div in:fly={{y:20,delay:150}} 
-             class="flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start"
+             class="flex flex-col gap-2.5 sm:flex-row sm:justify-center "
           >
             <Button href="/add" variant="default" size="lg">
               Submit Contact
@@ -60,7 +61,7 @@
 
         <!-- social - start -->
         <div in:fly={{x:20, duration:500}}
-          class="mt-8 flex items-center justify-center gap-4 sm:mt-16 lg:justify-start"
+          class="mt-3 flex items-center justify-center gap-4 sm:mt-16 "
         >
           <span
             class="text-sm font-semibold uppercase tracking-widest text-gray-400 sm:text-base"
@@ -93,19 +94,19 @@
       <!-- content - end -->
 
       <!-- image - start -->
-      <div class=" overflow-hidden lg:hidden xl:block xl:w-6/12" in:fade={{ duration:500}}> 
+      <!-- <div class=" overflow-hidden lg:hidden xl:block xl:w-6/12" in:fade={{ duration:500}}> 
         <img 
           src={i}
           loading="lazy"
           alt="by Fakurian Design"
           class=" w-full object-cover object-center  rotate-12"
         />
-      </div>
+      </div> -->
       <!-- image - end -->
     </section>
   </div>
 </div>
-
+<Stats/>
 <Faq/>
 
 <Footer/>
