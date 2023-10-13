@@ -1,17 +1,20 @@
- import { createVcard } from "$lib/scripts/helper";
+import { createVcard } from "$lib/scripts/helper";
 import {
   calculateBatchExpiry,
   getReadableDate,
 } from "$lib/scripts/helper/time";
+
 import {
   createNewBatch,
   getOrCreateBatch,
   updateBatchInfo,
 } from "$lib/server/supabase/batchManager";
+
 import {
   deleteUnverifiedContacts,
   getVerifiedContacts,
 } from "$lib/server/supabase/contactsManager";
+
 import type { Batch, BatchResponse } from "$lib/types";
 import type { Load } from "@sveltejs/kit";
 import { isPast, parseISO } from "date-fns";
@@ -28,7 +31,7 @@ export const load: Load = async () => {
     name: "batch-0",
     amount: 0,
     expires: expiryDate,
-    archived_at: calculateBatchExpiry(calculateBatchExpiry(new Date()), 1),
+    archived_at: calculateBatchExpiry(calculateBatchExpiry(today), 1),
     content: "",
     id: uuidv4(),
     batch_status: "active",
@@ -65,7 +68,6 @@ export const load: Load = async () => {
       return res;
     }
 
-    
     if (
       getReadableDate(today) === getReadableDate(batch.archived_at) ||
       isPast(parseISO(batch.archived_at))
@@ -74,17 +76,19 @@ export const load: Load = async () => {
       batch.batch_status = "archived";
       batch = await updateBatchInfo({ ...batch }, batch.id);
       if (batch && batch.error) return batch;
-  
+
       // deleting contacts in preparation for new batch
       const delError = await deleteUnverifiedContacts();
       if (delError) return delError;
-  
+
       // creating new batch
-      batchDetails.name = `batch-${parseInt(batch.name.split("batch-")[1]) + 1}`;
-  
+      batchDetails.name = `batch-${
+        parseInt(batch.name.split("batch-")[1]) + 1
+      }`;
+
       batch = await createNewBatch(batchDetails);
       if (batch && batch.error) return batch;
-  
+
       // returning data
       const res: BatchResponse = {
         content: batch.content,
@@ -96,11 +100,10 @@ export const load: Load = async () => {
         error: null,
         createFile: false,
       };
-  
+
       return res;
     }
   }
-
 
   const res: BatchResponse = {
     content: batch.content,
