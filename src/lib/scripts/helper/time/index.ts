@@ -3,10 +3,8 @@ import { isString} from 'mathjs'
 
 export const calculateBatchExpiry = (
   date: Date | number,
-  amount: number = 1
-) => {
-  return addDays(date, amount);
-};
+  amount: number = 7
+): Date => {return addDays(date, amount)};
 
 export const calculateTimeToExpiration = (date: Date | number) => {
   return formatDistanceToNow(date);
