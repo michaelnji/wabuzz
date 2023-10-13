@@ -12,6 +12,7 @@
   import { Loader } from "lucide-svelte";
   import Loading from "$lib/components/custom/loading.svelte";
   import Stats from "$lib/components/custom/stats.svelte";
+  import Features from "$lib/components/custom/features.svelte";
   export let data
   let ready:boolean = false
 
@@ -106,6 +107,7 @@
     </section>
   </div>
 </div>
+<!-- <Features/> -->
 <Stats/>
 <Faq/>
 
