@@ -106,7 +106,7 @@
     <div class="max-w-lg mx-auto">
       <img
         src={f}
-        class="max-w-md"
+        class="max-w-md w-full"
         in:fly={{ y: 40 }}
         alt="file illustration"
       />
@@ -114,10 +114,10 @@
         in:fly={{ y: -20 }}
         class="scroll-m-20 text-3xl text-center tracking-tight font-head mb-4"
       >
-        The file is not yet available for download
+        The file is not yet available
       </h2>
       <p class="opacity-80 text-center text-md" in:fade>
-        Please come back again later
+        Please come back again later to download the file.
       </p>
     </div>
   </section>
