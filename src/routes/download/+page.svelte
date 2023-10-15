@@ -102,7 +102,7 @@
    <Footer />
 {:else if ready && data.status == 200 && !data.createFile}
   <Banner date={data.expires} name={data.name} finishes={data.archived_at} />
-  <section class="pt-8 h-screen w-full grid place-items-center">
+  <section class="pt-8 h-full my-28 w-full grid place-items-center">
     <div class="max-w-lg mx-auto">
       <img
         src={f}
