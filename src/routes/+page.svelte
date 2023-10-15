@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { socials } from "$lib/data/socialLinks";
 	import { fade, fly } from "svelte/transition";
   import i from "$lib/images/w.webp";
   import e from '$lib/images/404.svg'
@@ -72,7 +73,7 @@
 
           <div class="flex gap-4">
             <a
-              href="/"
+              href={socials.whatsapp.community}
               target="_blank"
               class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600"
             >
